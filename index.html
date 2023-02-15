@@ -9,7 +9,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="script.js"></script>
+	
 </head>
 <body>
 <header>
@@ -18,7 +18,7 @@
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li>login</li>
+			<li><a href="login.html">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -37,8 +37,14 @@
 	</section>
 	<section id="portfolio">
 		<h2>Mes Projets</h2>
-		<div class="gallery">
-			
+		<div id="filters">
+			<button id="tous" class="filter">Tous</button>
+			<button id="objets" class="filter">Objets</button>
+			<button id="appartements" class="filter">Appartements</button>
+			<button id="hotels" class="filter">Hotels & restaurants</button>
+		</div>
+		<div id="gallery">
+
 		</div>
 	</section>
 	<section id="contact">
@@ -64,4 +70,5 @@
 	</nav>
 </footer>
 </body>
+	<script src="script.js"></script>
 </html>

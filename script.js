@@ -1,33 +1,89 @@
 // récupération de l'élément du DOM qui aura les différents travaux
-const portfolio = document.getElementById('#portfolio')
-const gallery = document.getElementsByClassName('.gallery');
-gallery.innerText= "Hello!"
+const gallery = document.getElementById('gallery');
 
 // récupére les éléments de l'api
 const url = 'http://localhost:5678/api/works';
 
 const work = async () => {
    const data = await fetch(url).then(response => response.json());
-   console.log(data)
-   for(let i = 0; i < data.length; i++){
-    const titles = data[i].title;
-    console.log(titles);
-    const images = data[i].imageUrl;
-    console.log(images)
-   }
+   return data;
 }
-work()
+
+const main = async () => {
+  const infos = await work();
+
+  for(let i = 0; i < infos.length; i++){
+
+    const figure = document.createElement("figure");
+    const img = document.createElement("img");
+    img.src = infos[i].imageUrl;
+    img.alt = infos[i].title;
+    img.crossOrigin = "anonymous";
+    figure.className = infos[i].categoryId;
+
+    const figcaption = document.createElement("figcaption");
+    figcaption.innerText = infos[i].title;
+
+    figure.appendChild(img);
+    figure.appendChild(figcaption);
+    gallery.appendChild(figure);
+  } 
+
+  const filtreObjets = document.getElementById('objets');
+
+  filtreObjets.addEventListener('click', () => {
+    const objetsFiltrees = infos.filter( info => {
+      return info.categoryId === 1 
+    })
+
+    document.getElementById('gallery').innerHTML = "";
+    
+    console.log(objetsFiltrees)
+  })
+
+  const filtreTous = document.getElementById('tous');
+
+  filtreTous.addEventListener('click', () => {
+    const objetsFiltrees = infos.filter( info => {
+      return info.categoryId <= 3
+  })
+  document.getElementById('gallery').innerHTML = "";
+  
+  console.log(objetsFiltrees)
+
+  })
+ 
+
+  const filtreAppartements = document.getElementById('appartements');
+  filtreAppartements.addEventListener('click', () => {
+    const objetsFiltrees = infos.filter( info => {
+      return info.categoryId === 2
+    })
+
+    document.getElementById('gallery').innerHTML = "";
+    
+    console.log(objetsFiltrees)
+  })
+
+  const filtreHotels = document.getElementById('hotels');
+  filtreHotels.addEventListener('click', () => {
+    const objetsFiltrees = infos.filter( info => {
+      return info.categoryId === 3 
+    })
+
+    document.getElementById('gallery').innerHTML = "";
+   
+    console.log(objetsFiltrees)
+  })
+  } 
+  
+  
+
+  
 
 
-// creation balises
-const figure = document.createElement("figure");
-figure.innerText = "Hello world";
-const img = document.createElement("img");
-// img.src = ;
-// img.alt = ;
-const figcaption = document.createElement("figcaption");
-figcaption.innerText = "Hello world"
+main()
 
-portfolio.appendChild(gallery);
-// figure.appendChild(img);
-// figure.appendChild(figcaption);
+
+
+
