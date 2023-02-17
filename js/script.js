@@ -1,3 +1,6 @@
+import { navbar } from "./navbar.js";
+
+navbar();
 // récupération de l'élément du DOM qui aura les différents travaux
 const gallery = document.getElementById('gallery');
 

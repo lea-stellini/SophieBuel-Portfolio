@@ -30,6 +30,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	height: 940px;
+	display:flex;
+	flex-direction: column;
 }
 ol, ul {
 	list-style: none;
@@ -92,6 +95,7 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	cursor: pointer;
 }
 
 li:hover {
@@ -100,15 +104,14 @@ li:hover {
 
 nav a {
 	text-decoration: none;
-	cursor: pointer;
 }
 
 nav a:visited {
 	color: black;
 }
 
-nav li:active{
-	font-weight: bold;
+.bold{
+	font-weight: 600;
 }
 
 #introduction {
@@ -162,7 +165,6 @@ nav li:active{
 	background-color: #1D6154;
 	border: solid 1px #1D6154;
 	cursor: pointer;
-
 }
 
 #gallery {
@@ -185,27 +187,27 @@ figcaption{
 	width: 50%;
 	margin: auto;
 }
-#contact > *, #login > * {
+#contact > *, #loginPage > * {
 	text-align: center;
 
 }
-#contact h2, #login h2{
+#contact h2, #loginPage h2{
 	margin-bottom: 20px;
 }
-#contact form, #login form {
+#contact form, #loginPage form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input, #login input{
+#contact input, #loginPage input{
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label, #login label{
+#contact label, #loginPage label{
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
@@ -223,7 +225,6 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
-
 
 footer nav ul {
 	display: flex;

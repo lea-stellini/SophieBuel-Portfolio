@@ -1,4 +1,9 @@
-#login{
+#loginPage{
 	width: 30%;
 	margin: auto;
+	text-align: center;
+}
+
+.forgotPwd{
+	color:black;
 }
