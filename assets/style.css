@@ -97,6 +97,20 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+nav a {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+nav a:visited {
+	color: black;
+}
+
+nav li:active{
+	font-weight: bold;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;

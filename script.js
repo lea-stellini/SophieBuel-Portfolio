@@ -9,8 +9,9 @@ const work = async () => {
    return data;
 }
 
-const main = async () => {
-  const infos = await work();
+const displayInfos = (infos) => {
+
+  document.getElementById('gallery').innerHTML = "";
 
   for(let i = 0; i < infos.length; i++){
 
@@ -28,6 +29,19 @@ const main = async () => {
     figure.appendChild(figcaption);
     gallery.appendChild(figure);
   } 
+}
+
+
+const main = async () => {
+  const infos = await work();
+
+  displayInfos(infos);
+
+  const filtreTous = document.getElementById('tous');
+
+    filtreTous.addEventListener('click', () => {
+      displayInfos(infos)
+    })
 
   const filtreObjets = document.getElementById('objets');
 
@@ -35,24 +49,9 @@ const main = async () => {
     const objetsFiltrees = infos.filter( info => {
       return info.categoryId === 1 
     })
-
-    document.getElementById('gallery').innerHTML = "";
-    
+    displayInfos(objetsFiltrees);
     console.log(objetsFiltrees)
   })
-
-  const filtreTous = document.getElementById('tous');
-
-  filtreTous.addEventListener('click', () => {
-    const objetsFiltrees = infos.filter( info => {
-      return info.categoryId <= 3
-  })
-  document.getElementById('gallery').innerHTML = "";
-  
-  console.log(objetsFiltrees)
-
-  })
- 
 
   const filtreAppartements = document.getElementById('appartements');
   filtreAppartements.addEventListener('click', () => {
@@ -60,8 +59,7 @@ const main = async () => {
       return info.categoryId === 2
     })
 
-    document.getElementById('gallery').innerHTML = "";
-    
+    displayInfos(objetsFiltrees);
     console.log(objetsFiltrees)
   })
 
@@ -71,16 +69,11 @@ const main = async () => {
       return info.categoryId === 3 
     })
 
-    document.getElementById('gallery').innerHTML = "";
-   
+    displayInfos(objetsFiltrees);
     console.log(objetsFiltrees)
   })
   } 
   
-  
-
-  
-
 
 main()
 
