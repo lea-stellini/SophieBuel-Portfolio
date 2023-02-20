@@ -27,7 +27,7 @@ const postLogin = async (data) => {
     }
 }
 
-const login = () => {
+function login() {
 
 const email = document.getElementById('email').value;
 const password = document.getElementById('password').value;
@@ -37,8 +37,18 @@ let data = {
     "password": password,
 }
 
+if(email == "" || password == ""){
+    alert('noooo')
+    return false
+}else{
+    true;
+}
+
+console.log(data);
+
 postLogin(data);
 
 }
 
 login()
+

@@ -38,16 +38,16 @@ const displayInfos = (infos) => {
 const main = async () => {
   const infos = await work();
 
+  console.log(infos)
+
   displayInfos(infos);
 
   const filterAll = document.getElementById('all');
-
     filterAll.addEventListener('click', () => {
       displayInfos(infos);
     })
 
   const filterObjects = document.getElementById('objects');
-
   filterObjects.addEventListener('click', () => {
     const objectsFilter = infos.filter( info => {
       return info.categoryId === 1 
@@ -72,7 +72,7 @@ const main = async () => {
 
     displayInfos(objectsFilter);
   })
-  } 
+} 
   
 
 main()

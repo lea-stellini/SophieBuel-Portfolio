@@ -26,11 +26,11 @@
     </header>
     <main id="loginPage">
         <h2>Log in</h2>
-        <form onsubmit="login()">
+        <form onsubmit="return login()">
             <label for="email">E-mail</label>
             <input type="email" id="email">
             <label for="password">Mot de passe</label>
-            <input type="password" id="password">
+            <input type="password" id="password" >
             <input type="submit" value="Se connecter">
         </form>
         <a href="#" class="forgotPwd">Mot de passe oublié</a>
