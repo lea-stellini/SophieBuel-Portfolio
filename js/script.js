@@ -40,40 +40,37 @@ const main = async () => {
 
   displayInfos(infos);
 
-  const filtreTous = document.getElementById('tous');
+  const filterAll = document.getElementById('all');
 
-    filtreTous.addEventListener('click', () => {
-      displayInfos(infos)
+    filterAll.addEventListener('click', () => {
+      displayInfos(infos);
     })
 
-  const filtreObjets = document.getElementById('objets');
+  const filterObjects = document.getElementById('objects');
 
-  filtreObjets.addEventListener('click', () => {
-    const objetsFiltrees = infos.filter( info => {
+  filterObjects.addEventListener('click', () => {
+    const objectsFilter = infos.filter( info => {
       return info.categoryId === 1 
     })
-    displayInfos(objetsFiltrees);
-    console.log(objetsFiltrees)
+    displayInfos(objectsFilter);
   })
 
-  const filtreAppartements = document.getElementById('appartements');
-  filtreAppartements.addEventListener('click', () => {
-    const objetsFiltrees = infos.filter( info => {
+  const filterApartments = document.getElementById('apartments');
+  filterApartments.addEventListener('click', () => {
+    const objectsFilter = infos.filter( info => {
       return info.categoryId === 2
     })
 
-    displayInfos(objetsFiltrees);
-    console.log(objetsFiltrees)
+    displayInfos(objectsFilter);
   })
 
-  const filtreHotels = document.getElementById('hotels');
-  filtreHotels.addEventListener('click', () => {
-    const objetsFiltrees = infos.filter( info => {
+  const filterHotels = document.getElementById('hotels');
+  filterHotels.addEventListener('click', () => {
+    const objectsFilter = infos.filter( info => {
       return info.categoryId === 3 
     })
 
-    displayInfos(objetsFiltrees);
-    console.log(objetsFiltrees)
+    displayInfos(objectsFilter);
   })
   } 
   
