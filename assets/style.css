@@ -102,7 +102,7 @@ li:hover {
 	color: #B1663C;
 }
 
-nav a {
+a {
 	text-decoration: none;
 	color: black;
 }
@@ -120,8 +120,9 @@ nav a:visited {
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
