@@ -7,29 +7,39 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
-	<!-- <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet"> -->
+	<script src="https://kit.fontawesome.com/29dae32bee.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/edit.css">
 	
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-	<nav>
-		<ul>
-			<li id="projetsNav">projets</li>
-			<li id="contactNav"><a href="#contact">contact</a></li>
-			<li><a href="login.html" id="loginNav">login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+		<div class="noedit publish">
+			<p><i class="fa-solid fa-pen-to-square"></i>Mode édition</p>
+			<button>publier les changements</button>
+		</div>
+		<div id="navbar">
+			<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+			<nav>
+				<ul>
+					<li id="projetsNav">projets</li>
+					<li id="contactNav"><a href="#contact">contact</a></li>
+					<li id="loginNav"><a href="login.html">login</a></li>
+					<li id="logoutNav" class="noedit"><a href="index.html">logout</a></li>
+					<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+				</ul>
+			</nav>
+		</div>
 </header>
 <main>
 	<section id="introduction">
 		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
+			<img src="./assets/images/sophie-bluel.png" alt="Sophie Bluel">
+			<a href="" class="noedit"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
+			<a href="" class="noedit"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -37,7 +47,27 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class="container">
+            <h2>Mes Projets</h2>
+            <a href="#modal" class="noedit"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+			<aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" >
+				<div class="modal-wrapper">
+					<h2 id="titlemodal">Galerie photo</h2>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+					<p>dlkjsghqlkfjhgkfdfdlhgmldfk</p>
+				</div>
+			</aside>
+        </div>
 		<div id="filters">
 			<button id="all" class="filter">Tous</button>
 			<button id="objects" class="filter">Objets</button>

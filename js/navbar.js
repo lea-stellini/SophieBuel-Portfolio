@@ -3,8 +3,6 @@ const projetsNav = document.getElementById('projetsNav');
 const introduction = document.getElementById('introduction');
 const loginPage = document.getElementById('loginPage');
 
-const url = "index.html#contact"; 
-
 export const navbar = () => {
     
     if(introduction){

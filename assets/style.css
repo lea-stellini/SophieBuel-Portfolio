@@ -58,8 +58,10 @@ body {
 }
 header {
 	display: flex;
-	justify-content: space-between;
-	margin: 50px 0
+    flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+    width:100%;
 }
 section {
 	margin: 50px 0
@@ -118,6 +120,7 @@ nav a:visited {
 #introduction {
 	display: flex;
 	align-items: center;
+
 }
 #introduction figure {
 	flex: 1;
@@ -130,9 +133,16 @@ nav a:visited {
 }
 
 #introduction article {
-	flex: 1
+	flex: 1;
 }
+
+#introduction article a {
+	margin: 0;
+}
+
+
 #introduction h2 {
+	margin-top: 1em;
 	margin-bottom: 1em;
 }
 

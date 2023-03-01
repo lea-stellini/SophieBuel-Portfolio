@@ -1,54 +1,64 @@
 import { navbar } from "./navbar.js";
 
-
 navbar();
 
-const postLogin = async (data) => {
+const loginForm = document.getElementById('loginForm')
+const emailInput = document.getElementById('email')
+const passwordInput = document.getElementById('password')
 
+
+let email = emailInput.addEventListener('change', (event) => {
+    const email = event.target.value;
+    return email
+})
+
+
+let password = passwordInput.addEventListener('change', (event) => {
+   const password = event.target.value;
+   return password
+})
+
+const postLogin = async (data) => {
     let response = await fetch('http://localhost:5678/api/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(data) 
-    });
+    }); 
 
-    let result = await response.json(email, password);
-    console.log(result)
     
-   // const expected = 
-    console.log(expected)
+    
+   
 
-    if(result = expected){
-        // window.location 
-        console.log("Ok")
-    }else{
-        console.log('404')
+    if(response.status === 200){
+       // window.location = "http://127.0.0.1:5500/index.html"
+
+        const login = document.getElementById("loginNav");
+        console.log(login);
+        const logout = document.getElementById("logoutNav"); 
+        login.className = "edit";
+        logout.className = "noedit";
+    }else if(response.status === 404){
+        alert('Votre identifiant ou mot de passe ne sont pas valides')
+    }else if(response.status === 500){
+        alert('Désolé, il semblerait que notre service ait un problème...')
     }
+
+    console.log(response);
+   // let result = await response.json(email, password);  
 }
 
-function login() {
+loginForm.addEventListener('submit', event => {
+    event.preventDefault();
+    
+    let data = {
+        "email": "sophie.bluel@test.tld",
+        "password": "S0phie",
+    }
 
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+    postLogin(data)
+})
 
-let data = {
-    "email": email,
-    "password": password,
-}
 
-if(email == "" || password == ""){
-    alert('noooo')
-    return false
-}else{
-    true;
-}
-
-console.log(data);
-
-postLogin(data);
-
-}
-
-login()
 
