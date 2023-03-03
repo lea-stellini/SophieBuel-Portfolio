@@ -1,64 +1,70 @@
 import { navbar } from "./navbar.js";
+import { globalConfig } from "../config.js"
 
-navbar();
-
+//Récupération des éléments du DOM
 const loginForm = document.getElementById('loginForm')
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
+const labelEmail = document.getElementById('labelEmail')
+const labelPwd = document.getElementById('labelPwd')
+const invalidEmail = document.getElementById('invalidEmail')
+const invalidPwd = document.getElementById('invalidPwd');
 
+// Redirecation vers page édition
+const goToAdminPage = (response) => {
 
-let email = emailInput.addEventListener('change', (event) => {
-    const email = event.target.value;
-    return email
-})
+     if(response.status === 200){
+        window.location = "index.html";
+    } else if (response.status === 401){
+       emailInput.classList.remove("borderInput");
+       passwordInput.classList.remove("borderInput")
+       emailInput.classList = "redBorder";
+       passwordInput.classList = "redBorder";
+       labelEmail.classList = 'labelColor';
+       labelPwd.classList = 'labelColor';
+       invalidEmail.classList = 'errorMessage';
+       invalidPwd.classList = 'errorMessage';
+    } else {
+        alert('Désolé, il semble que le serveur a un problème...')
+    }
+}
 
-
-let password = passwordInput.addEventListener('change', (event) => {
-   const password = event.target.value;
-   return password
-})
-
+// Envoi des informations de login
 const postLogin = async (data) => {
-    let response = await fetch('http://localhost:5678/api/users/login', {
+    let response = await fetch(`${globalConfig.url}users/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify(data) 
     }); 
-
+    const parseResponse = await response.json()
     
-    
-   
-
-    if(response.status === 200){
-       // window.location = "http://127.0.0.1:5500/index.html"
-
-        const login = document.getElementById("loginNav");
-        console.log(login);
-        const logout = document.getElementById("logoutNav"); 
-        login.className = "edit";
-        logout.className = "noedit";
-    }else if(response.status === 404){
-        alert('Votre identifiant ou mot de passe ne sont pas valides')
-    }else if(response.status === 500){
-        alert('Désolé, il semblerait que notre service ait un problème...')
-    }
-
-    console.log(response);
-   // let result = await response.json(email, password);  
+   goToAdminPage(response)
+   getToken(parseResponse)
 }
+// récupération de l'email
+let email;
+emailInput.addEventListener('change', (event) => {
+    email = event.target.value;
+})
 
+// récupération du mot de passe
+let password;
+passwordInput.addEventListener('change', (event) => {
+    password = event.target.value;
+ })
+
+// se déclanche lors du clique sur se connecter
 loginForm.addEventListener('submit', event => {
     event.preventDefault();
     
     let data = {
-        "email": "sophie.bluel@test.tld",
-        "password": "S0phie",
+        email: email,
+        password: password,
     }
-
     postLogin(data)
 })
 
-
+navbar();
 

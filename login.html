@@ -30,10 +30,10 @@
     <main id="loginPage">
         <h2>Log in</h2>
         <form id="loginForm">
-            <label for="email">E-mail</label>
-            <input type="email" id="email">
-            <label for="password">Mot de passe</label>
-            <input type="password" id="password" >
+            <label for="email" id="labelEmail">E-mail <span id="invalidEmail" class="invalid">invalide</span></label>
+            <input type="email" id="email" class="borderInput">
+            <label for="password" id="labelPwd">Mot de passe <span id="invalidPwd" class="invalid">invalide</span> </label>
+            <input type="password" id="password" class="borderInput">
             <input type="submit" value="Se connecter">
         </form>
         <a href="#" class="forgotPwd">Mot de passe oublié</a>

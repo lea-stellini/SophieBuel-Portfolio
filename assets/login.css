@@ -4,6 +4,25 @@
 	text-align: center;
 }
 
+.invalid{
+	display: none;
+}
+
+
+.redBorder{
+	border-radius: 5px;
+	border: solid 2px red;
+}
+
+.labelColor{
+	color:red
+}
+
+.errorMessage{
+	display: inline;
+	color: red;
+}
+
 .forgotPwd{
 	color:black;
 }

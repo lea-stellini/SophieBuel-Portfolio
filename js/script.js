@@ -1,17 +1,16 @@
 import { navbar } from "./navbar.js";
+import { globalConfig } from "../config.js";
 
-navbar();
 // récupération de l'élément du DOM qui aura les différents travaux
 const gallery = document.getElementById('gallery');
 
 // récupére les éléments de l'api
-const url = 'http://localhost:5678/api/works';
-
 const work = async () => {
-   const data = await fetch(url).then(response => response.json());
+   const data = await fetch(`${globalConfig.url}works`).then(response => response.json());
    return data;
 }
 
+// affiche les éléments
 const displayInfos = (infos) => {
 
   document.getElementById('gallery').innerHTML = "";
@@ -34,11 +33,9 @@ const displayInfos = (infos) => {
   } 
 }
 
-
+// filtre les éléments
 const main = async () => {
   const infos = await work();
-
-  console.log(infos)
 
   displayInfos(infos);
 
@@ -60,7 +57,6 @@ const main = async () => {
     const objectsFilter = infos.filter( info => {
       return info.categoryId === 2
     })
-
     displayInfos(objectsFilter);
   })
 
@@ -69,14 +65,9 @@ const main = async () => {
     const objectsFilter = infos.filter( info => {
       return info.categoryId === 3 
     })
-
     displayInfos(objectsFilter);
   })
-} 
-  
+}
 
+navbar();
 main()
-
-
-
-
