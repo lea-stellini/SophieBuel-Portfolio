@@ -1,8 +1,14 @@
 import { navbar } from "./navbar.js";
 import { globalConfig } from "../config.js";
 
-// récupération de l'élément du DOM qui aura les différents travaux
+// récupération des éléments du DOM 
 const gallery = document.getElementById('gallery');
+const login = document.getElementById("loginNav");
+const logout = document.getElementById("logoutNav"); 
+const editBar = document.getElementById("edit");
+const editImg = document.getElementById("editImg");
+const editArticle = document.getElementById("editArticle");
+const editWorks = document.getElementById("editWorks");
 
 // récupére les éléments de l'api
 const work = async () => {
@@ -68,6 +74,27 @@ const main = async () => {
     displayInfos(objectsFilter);
   })
 }
+
+// se déconnecter 
+logout.addEventListener('click', () => {
+  localStorage.clear()
+})
+
+// Accès page Admin
+if(localStorage.getItem("token")){
+    
+    login.classList.remove("edit");
+    login.classList.add("noedit");
+    logout.classList.remove("noedit");
+    editBar.classList.remove("noedit");
+    editBar.classList.add("flex");
+    editImg.classList.remove("noedit");
+    editArticle.classList.remove("noedit");
+    editWorks.classList.remove("noedit");
+}
+
+
+        
 
 navbar();
 main()

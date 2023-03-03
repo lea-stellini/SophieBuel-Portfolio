@@ -6,8 +6,7 @@
     display: block;
 }
 
-#publish{
-    display: flex;
+#edit{
     background-color: black;
     margin: 0;
     width: 100%;
@@ -28,6 +27,10 @@
     border: none;
     background-color: white;
     cursor: pointer;
+}
+
+.flex{
+    display: flex;
 }
 
 #navbar{

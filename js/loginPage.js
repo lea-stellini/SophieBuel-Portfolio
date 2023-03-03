@@ -1,5 +1,5 @@
 import { navbar } from "./navbar.js";
-import { globalConfig } from "../config.js"
+import { globalConfig } from "../config.js";
 
 //Récupération des éléments du DOM
 const loginForm = document.getElementById('loginForm')
@@ -9,6 +9,11 @@ const labelEmail = document.getElementById('labelEmail')
 const labelPwd = document.getElementById('labelPwd')
 const invalidEmail = document.getElementById('invalidEmail')
 const invalidPwd = document.getElementById('invalidPwd');
+
+// stock le token dans le local storage
+const getToken = (parseResponse) => {
+    localStorage.setItem('token', parseResponse.token)
+}
 
 // Redirecation vers page édition
 const goToAdminPage = (response) => {
@@ -39,9 +44,9 @@ const postLogin = async (data) => {
         body: JSON.stringify(data) 
     }); 
     const parseResponse = await response.json()
-    
-   goToAdminPage(response)
-   getToken(parseResponse)
+   
+    getToken(parseResponse)
+    goToAdminPage(response)
 }
 // récupération de l'email
 let email;

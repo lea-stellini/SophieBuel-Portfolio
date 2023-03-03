@@ -219,6 +219,10 @@ figcaption{
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
+#contact input{
+	border:0;
+}
+
 .borderInput{
 	border:0;
 }
