@@ -6,19 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/29dae32bee.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<link rel="stylesheet" href="./assets/edit.css">
+	<link rel="stylesheet" href="./assets/login.css">
 	
 </head>
 <body>
+	<aside id="edit" class="noedit">
+		<p><i class="fa-solid fa-pen-to-square"></i>Mode édition</p>
+		<button>publier les changements</button>
+	</aside>
 <header>
-		<div id="edit" class="noedit">
-			<p><i class="fa-solid fa-pen-to-square"></i>Mode édition</p>
-			<button>publier les changements</button>
-		</div>
 		<div id="navbar">
 			<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 			<nav>
@@ -36,10 +37,10 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="Sophie Bluel">
-			<a href="" id="editImg" class="noedit"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+			<a href="" id="editImg" class="noedit allmodal"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
-			<a href="" id="editArticle" class="noedit"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+			<a href="" id="editArticle" class="noedit allmodal"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
@@ -49,14 +50,35 @@
 	<section id="portfolio">
 		<div class="container">
             <h2>Mes Projets</h2>
-            <a href="#modal" id="editWorks" class="noedit"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
+            <a href="#modal" id="editWorks" class="noedit allmodal"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 			<aside id="modal" class="modal noedit" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" >
 				<div class="modal-wrapper">
+					<button id="back"><img src="./assets/icons/Arrow_Back.svg" alt=""></button>
 					<button id="close">X</button>
 					<div class="gallery-wrapper">
-						<h3 id="titlemodal">Galerie photo</h3>
-					<div id="galleryEdit">
-
+						<h3 id="titlemodal">Galerie Photo </h3>
+					
+					<div id="galleryEdit" class="noedit">
+					</div>
+					<div id="addElements" class="noedit">
+						<form id="form" >
+							<div id="searchPicture">
+								<label for="photo"><i class="fa-sharp fa-regular fa-5x fa-image"></i></label>
+								<input type="file" id="photo" accept="image/jpg, image/png" size="4000000">
+								<p>jpg, png : 4mo max</p>
+							</div>
+							<label for="title" id="titleLabel">Titre</label>
+							<input type="text" id="title" class="borderInput">
+							<label for="category" id="categoryLabel">Catégorie</label>
+							<select name="category" id="category" class="borderInput">
+								<option value=" "></option>
+								<option value="Objets">Objets</option>
+								<option value="Appartements">Appartements</option>
+								<option value="Hotels & restaurants">Hotels & restaurants</option>
+							</select>
+							<div id="dividerform"></div>
+							<button id="validate">Valider</button>
+						</form>
 					</div>
 					<div id="divider"></div>
 					<div class="container">

@@ -8,18 +8,17 @@
 	display: none;
 }
 
-
 .redBorder{
 	border-radius: 5px;
 	border: solid 2px red;
 }
 
-.labelColor{
-	color:red
+.redWarning{
+	color:red;
+	text-align:center
 }
 
 .errorMessage{
-	display: inline;
 	color: red;
 }
 

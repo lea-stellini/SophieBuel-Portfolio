@@ -3,7 +3,7 @@ const projetsNav = document.getElementById('projetsNav');
 const introduction = document.getElementById('introduction');
 const loginPage = document.getElementById('loginPage');
 
-export const navbar = () => {
+export const displayNavbar = () => {
     
     if(introduction){
         projetsNav.className = 'bold';

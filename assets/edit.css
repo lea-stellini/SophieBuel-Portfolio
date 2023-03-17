@@ -75,12 +75,11 @@
 .modal-wrapper{
     background-color: white;
     width:600px;
-    height: 700px;
+    height: 670px;
     max-width: calc(100vw - 20px);
     max-height: calc(100vh - 20px);
     border-radius: 10px;
     padding: 20px;
-  
 }
 
 .gallery-wrapper{
@@ -98,7 +97,7 @@
 #close{
     font-size: 20px;
     position: relative;
-    left:570px;
+    left:540px;
 }
 
 #galleryEdit{
@@ -133,7 +132,7 @@
 
 #divider{
     height: 1px;
-    width: 400px;
+    width: 500px;
     background-color:#B3B3B3;
     margin: 20px auto;
 }
@@ -163,3 +162,76 @@
     font-family: "Syne";
 }
 
+/* MODAL ADD PICTURES */
+
+#back{
+    border: 0;
+    background-color: transparent;
+}
+
+#dividerform{
+    height: 1px;
+    width: 100%;
+    background-color:#B3B3B3;
+    margin: 40px auto;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 600px;
+    margin: auto;
+}
+
+label{
+    font-family: "Work Sans";
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#title, select{
+    height: 50px;
+    box-shadow: 1px 1px 4px #c5c4c4;
+}
+
+#titleLabel, #categoryLabel{
+    margin: 30px 0 10px 0;
+}
+
+#searchPicture{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #E8F1F6;
+    height: 225px;
+    margin-top: 20px;
+}
+
+#searchPicture label .fa-image{
+    color: #B9C5CC;
+    margin-bottom: 30px;
+}
+
+#searchPicture p{
+    color: #444444;
+    margin-top: 10px;
+}
+
+#validate{
+    font-family: "Syne";
+    font-size: 14px;
+    font-weight: 700;
+    width: 240px;
+    height: 40px;
+    border-radius: 60px;
+    border: none;
+    color: #FFF;
+    background-color: #A7A7A7;
+    margin: auto;
+}
+
+#validate:hover{
+    background-color: #1D6154;
+}
