@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="./assets/login.css">
 	
 </head>
-<body>
+<body id="body">
 	<aside id="edit" class="noedit">
 		<p><i class="fa-solid fa-pen-to-square"></i>Mode édition</p>
 		<button>publier les changements</button>
@@ -53,7 +53,7 @@
             <a href="#modal" id="editWorks" class="noedit allmodal"><i class="fa-solid fa-pen-to-square"></i> modifier</a>
 			<aside id="modal" class="modal noedit" aria-hidden="true" role="dialog" aria-modal="false" aria-labelledby="titlemodal" >
 				<div class="modal-wrapper">
-					<button id="back"><img src="./assets/icons/Arrow_Back.svg" alt=""></button>
+					<button id="back" class="noedit"><img src="./assets/icons/Arrow_Back.svg" alt=""></button>
 					<button id="close">X</button>
 					<div class="gallery-wrapper">
 						<h3 id="titlemodal">Galerie Photo </h3>
@@ -61,21 +61,32 @@
 					<div id="galleryEdit" class="noedit">
 					</div>
 					<div id="addElements" class="noedit">
-						<form id="form" >
+						<form id="form">
 							<div id="searchPicture">
-								<label for="photo"><i class="fa-sharp fa-regular fa-5x fa-image"></i></label>
-								<input type="file" id="photo" accept="image/jpg, image/png" size="4000000">
-								<p>jpg, png : 4mo max</p>
+								<div id="inputPhoto" class="flex">
+									<i class="fa-sharp fa-regular fa-5x fa-image"></i>
+									<label for="photo" id="labelPhoto">
+										<p>+ Ajouter photo</p>  
+										<input type="file" id="photo" accept="image/jpg, image/png" size="4000000">
+									</label>
+									<p>jpg, png : 4mo max</p>
+								</div>
+								
+								<img src="#" alt="" id="photoFile" class="noedit">
 							</div>
 							<label for="title" id="titleLabel">Titre</label>
 							<input type="text" id="title" class="borderInput">
 							<label for="category" id="categoryLabel">Catégorie</label>
-							<select name="category" id="category" class="borderInput">
+							<div id="select-container">
+								<select name="category" id="category" class="borderInput">
 								<option value=" "></option>
-								<option value="Objets">Objets</option>
-								<option value="Appartements">Appartements</option>
-								<option value="Hotels & restaurants">Hotels & restaurants</option>
+								<option value="1">Objets</option>
+								<option value="2">Appartements</option>
+								<option value="3">Hotels & restaurants</option>
 							</select>
+							<img id="dropdown" src="./assets/icons/dropdown.png" alt="">
+							</div>
+							
 							<div id="dividerform"></div>
 							<button id="validate">Valider</button>
 						</form>

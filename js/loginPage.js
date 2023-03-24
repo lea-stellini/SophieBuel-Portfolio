@@ -31,7 +31,7 @@ const goToAdminPage = (response) => {
        labelEmail.classList = "errorMessage";
        labelPwd.classList = "errorMessage";
     } else {
-        emailInput.classList ="borderInput";
+       emailInput.classList ="borderInput";
        passwordInput.classList ="borderInput";
        emailInput.classList.remove("redBorder");
        passwordInput.classList.remove("redBorder");
@@ -39,7 +39,7 @@ const goToAdminPage = (response) => {
        invalidSpan.classList.remove("redWarning");
        labelEmail.classList.remove("errorMessage");
        labelPwd.classList.remove("errorMessage");
-        alert('Désolé, il semble que le serveur a un problème...')
+       alert('Désolé, il semble que le serveur a un problème...')
     }
 }
 
@@ -77,15 +77,17 @@ passwordInput.addEventListener("change", (event) => {
 // se déclanche lors du clique sur se connecter
 loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    invalidSpan.classList.add("invalid");
+    invalidEmail.classList.add("invalid");
+    missingEl.classList.add("invalid");
     
     let data = {
         email: email,
         password: password,
     }
 
-    if(email == null || password == null){
-        missingEl.classList.remove("invalid");
-        missingEl.classList.add("errorMessage")
+    if(email === null || password === null){
+        missingEl.classList.add("redWarning")
     }else{
         postLogin(data)
     }

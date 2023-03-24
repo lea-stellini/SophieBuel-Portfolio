@@ -3,6 +3,7 @@ import { globalConfig } from "../config.js";
 
 
 // récupération des éléments du DOM 
+const body = document.getElementById("body");
 const gallery = document.getElementById("gallery");
 const galleryEdit = document.getElementById("galleryEdit")
 const login = document.getElementById("loginNav");
@@ -22,7 +23,12 @@ const photoInput = document.getElementById("photo");
 const titleInput = document.getElementById("title");
 const categoryInput = document.getElementById("category");
 const searchPicture = document.getElementById("searchPicture");
-const divider = document.getElementById("divider")
+const divider = document.getElementById("divider");
+const photoFile = document.getElementById("photoFile");
+const inputPhoto = document.getElementById("inputPhoto");
+const form = document.getElementById("form");
+
+
 
 // récupére les éléments de l'api
 const work = async () => {
@@ -69,8 +75,10 @@ const displayPhoto = (infos) => {
     img.crossOrigin = "anonymous";
     p.innerText = "éditer";
     icon.src = "../assets/icons/delete.svg";
+    icon.className = "deleteBtn";
     button.className = "btnIcon";
     div.className = "card";
+    div.id = infos[i].id;
 
     button.appendChild(icon)
     div.appendChild(img);
@@ -142,13 +150,39 @@ if(localStorage.getItem("token")){
     editWorks.classList.remove("noedit");
 }
 
+// supprimer un projet
+
+const deleteWork = async (id) =>  {
+  let response = await fetch (`${globalConfig.url}works/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    }
+  });
+
+  console.log(response)
+}
+
+// test pour récupérer id de l'élément parent
+console.log(searchPicture.parentNode.id)
+
+let btnIcon = [document.getElementsByClassName("btnIcon")];
+console.log(btnIcon);
+btnIcon.forEach(btn => {
+  console.log(btn)
+  btn.addEventListener("click", () => {
+    console.log(btn.parentNode.id)
+  })
+ })
+ 
+
+
 let modal = null;
 
 // affichage de la modale
 const openModal = event => {
   const target = document.querySelector(event.target.getAttribute("href"))
-  console.log(target)
-  target.style.display = "flex"
+  target.style.display = "flex";
   target.setAttribute("aria-hidden", "false");
   target.setAttribute("aria-modal", "true");
   modal = target;
@@ -156,13 +190,22 @@ const openModal = event => {
   back.addEventListener("click", backModal);
 }
 
-// fermer la modale
+// fermer la modale avec la croix
 const closeModal = () => {
   modal.style.display = "none";
   modal.setAttribute("aria-hidden", "true");
   modal.setAttribute("aria-modal", "false");
   modal = null;
 }
+
+//fermer modale quand clique extérieur de la modale
+body.addEventListener("click", (event) => {
+  let modalId = event.target.id
+  
+  if(modalId === "modal"){
+    closeModal();
+  }
+})
 
 // retour en arrière
 const backModal = () => {
@@ -172,6 +215,7 @@ const backModal = () => {
   deleteGallery.classList.remove("noedit");
   addWork.classList.remove("noedit");
   divider.classList.remove("noedit");
+  back.classList.add("noedit");
   titleModal.innerText = "Galerie Photo";
 }
   
@@ -186,12 +230,27 @@ addWork.addEventListener("click", () =>{
   deleteGallery.classList.add("noedit");
   addWork.classList.add("noedit");
   divider.classList.add("noedit");
+  back.classList.remove("noedit");
   titleModal.innerText = "Ajout Photo";
 })
 
 let photo;
 photoInput.addEventListener('change', (event) => {
-  photo = event.target.value;
+  photo = event.target.files[0]
+ 
+  if(photo){
+    const reader = new FileReader();
+
+    reader.onload = function(event) {
+      photoFile.src = event.target.result
+    }
+
+    reader.readAsDataURL(photo)
+
+    photoFile.classList.remove("noedit");
+    inputPhoto.classList.add("noedit");
+    inputPhoto.classList.remove("flex")
+  }
 })
 
 let title;
@@ -207,12 +266,12 @@ categoryInput.addEventListener('change', (event) => {
 addWorkForm.addEventListener("submit", (event) => {
  event.preventDefault()
   let newWork = {
-    photo : photo,
+    image : photo,
     title : title,
-    category : category
+    category : category,
   }
 
-  if(title == null || photo == null || category === " "){
+  if(title === null || photo === null || category === " "){
     titleInput.classList.remove("borderInput");
     categoryInput.classList.remove("borderInput")
     titleInput.classList.add("redBorder");
@@ -224,9 +283,35 @@ addWorkForm.addEventListener("submit", (event) => {
     titleInput.classList.remove("redBorder");
     categoryInput.classList.remove("redBorder");
     searchPicture.classList.remove("redBorder");
-    nouvelFonction(newWork)
+   //postNewWork(newWork)
   }
 })
+
+// ajout d'un nouveau projet 
+form.onsubmit = async (event) => {
+
+  event.preventDefault();
+
+  const body = new FormData();
+
+  body.append("image", photo);
+  body.append("title", title);
+  body.append("category", category); 
+
+  let response = await fetch(`${globalConfig.url}works`, {
+    method: "POST",
+    headers: {
+      //"Content-Type": "multipart/form-data",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    },
+    body: body
+  });
+
+  let result = await response.json();
+
+  alert(result.message);
+
+}
 
 displayNavbar();
 main();
