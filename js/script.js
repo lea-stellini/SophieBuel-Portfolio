@@ -194,7 +194,6 @@ form.onsubmit = async (event) => {
   event.preventDefault()
 
   if(photo === undefined){
-    
     searchPicture.classList.add("redBorder");
   }else if(title === undefined){
    titleInput.classList.remove("borderInput");
