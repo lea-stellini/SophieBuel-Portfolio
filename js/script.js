@@ -1,10 +1,10 @@
 import { displayNavbar } from "./navbar.js";
-import { globalConfig } from "../config.js";
-
+import { work, postWork } from "../config.js";
+import { initDeleteBtn } from "./modal.js";
+import { displayInfos, displayPhoto } from "./display.js";
 
 // récupération des éléments du DOM 
 const body = document.getElementById("body");
-const gallery = document.getElementById("gallery");
 const galleryEdit = document.getElementById("galleryEdit")
 const login = document.getElementById("loginNav");
 const logout = document.getElementById("logoutNav"); 
@@ -17,7 +17,7 @@ const addWork = document.getElementById("addWork");
 const back = document.getElementById("back");
 const addElements = document.getElementById("addElements");
 const titleModal = document.getElementById("titlemodal");
-const addWorkForm = document.getElementById("form");
+//const addWorkForm = document.getElementById("form");
 const deleteGallery = document.getElementById("deleteGallery");
 const photoInput = document.getElementById("photo");
 const titleInput = document.getElementById("title");
@@ -27,66 +27,6 @@ const divider = document.getElementById("divider");
 const photoFile = document.getElementById("photoFile");
 const inputPhoto = document.getElementById("inputPhoto");
 const form = document.getElementById("form");
-
-
-
-// récupére les éléments de l'api
-const work = async () => {
-   const data = await fetch(`${globalConfig.url}works`).then(response => response.json());
-   return data;
-}
-
-// affiche les éléments sur la page projets
-const displayInfos = (infos) => {
-
-  document.getElementById("gallery").innerHTML = "";
-
-  for(let i = 0; i < infos.length; i++){
-
-    const figure = document.createElement("figure");
-    const img = document.createElement("img");
-    img.src = infos[i].imageUrl;
-    img.alt = infos[i].title;
-    img.crossOrigin = "anonymous";
-    figure.className = infos[i].categoryId;
-
-    const figcaption = document.createElement("figcaption");
-    figcaption.innerText = infos[i].title;
-
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
-    gallery.appendChild(figure);
-  } 
-}
-
-// affiche les éléments sur la galerie photo
-const displayPhoto = (infos) => {
-  document.getElementById("galleryEdit").innerHTML = "";
-
-  for(let i = 0; i < infos.length; i++){
-    const div = document.createElement("div");
-    const button = document.createElement("button");
-    const img = document.createElement("img");
-    const p = document.createElement("p");
-    const icon = document.createElement("img");
-
-    img.src = infos[i].imageUrl;
-    img.alt = infos[i].title;
-    img.crossOrigin = "anonymous";
-    p.innerText = "éditer";
-    icon.src = "../assets/icons/delete.svg";
-    icon.className = "deleteBtn";
-    button.className = "btnIcon";
-    div.className = "card";
-    div.id = infos[i].id;
-
-    button.appendChild(icon)
-    div.appendChild(img);
-    div.appendChild(button)
-    div.appendChild(p);
-    galleryEdit.appendChild(div);
-  }
-}
 
 // filtre les éléments
 const main = async () => {
@@ -150,33 +90,6 @@ if(localStorage.getItem("token")){
     editWorks.classList.remove("noedit");
 }
 
-// supprimer un projet
-
-const deleteWork = async (id) =>  {
-  let response = await fetch (`${globalConfig.url}works/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
-    }
-  });
-
-  console.log(response)
-}
-
-// test pour récupérer id de l'élément parent
-console.log(searchPicture.parentNode.id)
-
-let btnIcon = [document.getElementsByClassName("btnIcon")];
-console.log(btnIcon);
-btnIcon.forEach(btn => {
-  console.log(btn)
-  btn.addEventListener("click", () => {
-    console.log(btn.parentNode.id)
-  })
- })
- 
-
-
 let modal = null;
 
 // affichage de la modale
@@ -188,6 +101,7 @@ const openModal = event => {
   modal = target;
   close.addEventListener("click", closeModal);
   back.addEventListener("click", backModal);
+  initDeleteBtn();
 }
 
 // fermer la modale avec la croix
@@ -203,6 +117,7 @@ body.addEventListener("click", (event) => {
   let modalId = event.target.id
   
   if(modalId === "modal"){
+    backModal();
     closeModal();
   }
 })
@@ -263,54 +178,48 @@ categoryInput.addEventListener('change', (event) => {
   category = event.target.value;
 })
 
-addWorkForm.addEventListener("submit", (event) => {
- event.preventDefault()
-  let newWork = {
-    image : photo,
-    title : title,
-    category : category,
-  }
+// addWorkForm.addEventListener("submit", (event) => {
+//  event.preventDefault()
+//   let newWork = {
+//     image : photo,
+//     title : title,
+//     category : category,
+//   }
 
-  if(title === null || photo === null || category === " "){
-    titleInput.classList.remove("borderInput");
-    categoryInput.classList.remove("borderInput")
-    titleInput.classList.add("redBorder");
-    categoryInput.classList.add("redBorder");
+// 
+// })
+
+// ajout d'un nouveau projet 
+form.onsubmit = async (event) => {
+  event.preventDefault()
+
+  if(photo === undefined){
+    
     searchPicture.classList.add("redBorder");
+  }else if(title === undefined){
+   titleInput.classList.remove("borderInput");
+    titleInput.classList.add("redBorder");
+  }else if(category === undefined){
+    categoryInput.classList.remove("borderInput");
+    categoryInput.classList.add("redBorder");
   }else{
     titleInput.classList.add("borderInput");
     categoryInput.classList.add("borderInput")
     titleInput.classList.remove("redBorder");
     categoryInput.classList.remove("redBorder");
     searchPicture.classList.remove("redBorder");
-   //postNewWork(newWork)
-  }
-})
+   
+    const body = new FormData();
 
-// ajout d'un nouveau projet 
-form.onsubmit = async (event) => {
+    body.append("image", photo);
+    body.append("title", title);
+    body.append("category", category); 
 
-  event.preventDefault();
+    postWork(body);
+    backModal();
+    closeModal();
 
-  const body = new FormData();
-
-  body.append("image", photo);
-  body.append("title", title);
-  body.append("category", category); 
-
-  let response = await fetch(`${globalConfig.url}works`, {
-    method: "POST",
-    headers: {
-      //"Content-Type": "multipart/form-data",
-      "Authorization": `Bearer ${localStorage.getItem("token")}`
-    },
-    body: body
-  });
-
-  let result = await response.json();
-
-  alert(result.message);
-
+      }
 }
 
 displayNavbar();

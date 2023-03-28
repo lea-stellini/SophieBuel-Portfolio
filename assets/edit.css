@@ -113,14 +113,14 @@
 	width: 100%;
 }
 
-.card p{
-    margin-top: -18px
+.card{
+    position: relative;
 }
 
 .btnIcon{
     align-items: center;
-    position: relative;
-    bottom: 115px;
+    position: absolute;
+    bottom: 109px;
     left: 62px;
     padding: 2px 4px 1px 4px;
     background-color: black;
@@ -194,6 +194,8 @@ label{
     font-family: "Work Sans";
     font-weight: 500;
     font-size: 14px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 #labelPhoto{
@@ -216,7 +218,7 @@ label{
 }
 
 #photoFile{
-    max-width: 200px;
+    max-width: 165px;
     margin: auto;
 }
 
@@ -230,16 +232,22 @@ label{
     margin: 30px 0 10px 0;
 }
 
+#select-container{
+    position: relative;
+    width: 100%;
+}
+
 select{
     appearance: none; 
     cursor: pointer;
+    width: 100%;
 }
 
 #dropdown{
-    position: relative;
-    bottom: -29px;
+    position: absolute;
+    bottom: 20px;
     width: 1em;
-    right: -433px;
+    right: 30px;
    
 }
 
