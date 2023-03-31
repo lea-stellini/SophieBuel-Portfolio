@@ -11,6 +11,9 @@ const labelPwd = document.getElementById("labelPwd");
 const missingEl = document.getElementById("missingEl");
 const invalidEmail = document.getElementById("invalidEmail");
 
+let email;
+let password;
+
 // stock le token dans le local storage
 const getToken = (parseResponse) => {
     localStorage.setItem("token", parseResponse.token)
@@ -18,10 +21,9 @@ const getToken = (parseResponse) => {
 
 // Redirecation vers page édition
 const goToAdminPage = (response) => {
-
-     if(response.status === 200){
+    if(response.status === 200){
         window.location = "index.html";
-    } else if (response.status === 401){
+    } else if (response.status === 401 || response.status === 404 ){
        emailInput.classList.remove("borderInput");
        passwordInput.classList.remove("borderInput")
        emailInput.classList = "redBorder";
@@ -57,42 +59,56 @@ const postLogin = async (data) => {
     getToken(parseResponse)
     goToAdminPage(response)
 }
-// récupération de l'email
-let email;
-emailInput.addEventListener("change", (event) => {
-    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    email = event.target.value;
 
-    if(!regex.test(email)){
-        invalidEmail.classList="redWarning"
-    }
-})
-
-// récupération du mot de passe
-let password;
-passwordInput.addEventListener("change", (event) => {
-    password = event.target.value;
- })
-
-// se déclanche lors du clique sur se connecter
-loginForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+const validateFormLogin = () => {
     invalidSpan.classList.add("invalid");
     invalidEmail.classList.add("invalid");
     missingEl.classList.add("invalid");
-    
-    let data = {
-        email: email,
-        password: password,
-    }
+        
+    let hasError = false;
 
     if(email === null || password === null){
+        hasError = true;
         missingEl.classList.add("redWarning")
-    }else{
+    }
+
+    return hasError;
+}
+
+const initEventListeners = () => {
+    // récupération de l'email
+    emailInput.addEventListener("change", (event) => {
+        const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        email = event.target.value;
+
+        if(!regex.test(email)){
+            invalidEmail.classList="redWarning"
+        }
+    })
+
+    // récupération du mot de passe
+    passwordInput.addEventListener("change", (event) => {
+        password = event.target.value;
+    })
+
+    // se déclanche lors du clique sur se connecter
+    loginForm.onsubmit = (event) => {
+        event.preventDefault();
+       
+        const hasError = validateFormLogin();
+
+        if(hasError){
+            return;
+        }
+        
+        let data = {
+            email: email,
+            password: password,
+        }
+        
         postLogin(data)
     }
-   
-})
+}
 
 displayNavbar();
-
+initEventListeners();
