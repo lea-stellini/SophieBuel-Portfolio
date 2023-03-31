@@ -1,4 +1,4 @@
-import { work, apiDeleteWork } from "../config.js";
+import { getWorks, apiDeleteWork } from "../config.js";
 import { displayPhoto } from "./display.js";
 // supprimer un projet
 
@@ -6,7 +6,7 @@ const deleteWork = async (id) =>  {
     
     apiDeleteWork(id)
     
-    const infos = await work();
+    const infos = await getWorks();
      
     displayPhoto(infos);
   }

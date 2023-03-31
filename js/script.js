@@ -1,5 +1,5 @@
 import { displayNavbar } from "./navbar.js";
-import { work, postWork } from "../config.js";
+import { getWorks, postWork, getWorks } from "../config.js";
 import { initDeleteBtn } from "./modal.js";
 import { displayInfos, displayPhoto } from "./display.js";
 
@@ -30,7 +30,7 @@ const form = document.getElementById("form");
 
 // filtre les éléments
 const main = async () => {
-  const infos = await work();
+  const infos = await getWorks();
 
   console.log(infos)
 
@@ -68,7 +68,7 @@ const main = async () => {
 
 // Afficher les projets dans la galerie photo
 const displayModal = async () => {
-  const infos = await work();
+  const infos = await getWorks();
 
   displayPhoto(infos);
 }
@@ -168,12 +168,12 @@ photoInput.addEventListener('change', (event) => {
   }
 })
 
-let title;
+let title = "";
 titleInput.addEventListener('change', (event) => {
   title = event.target.value;
 })
 
-let category;
+let category = 0;
 categoryInput.addEventListener('change', (event) => {
   category = event.target.value;
 })
@@ -189,24 +189,42 @@ categoryInput.addEventListener('change', (event) => {
 // 
 // })
 
-// ajout d'un nouveau projet 
-form.onsubmit = async (event) => {
-  event.preventDefault()
+const validateForm = () => {
+  let hasError = false;
 
-  if(photo === undefined){
-    searchPicture.classList.add("redBorder");
-  }else if(title === undefined){
-   titleInput.classList.remove("borderInput");
-    titleInput.classList.add("redBorder");
-  }else if(category === undefined){
-    categoryInput.classList.remove("borderInput");
-    categoryInput.classList.add("redBorder");
-  }else{
-    titleInput.classList.add("borderInput");
-    categoryInput.classList.add("borderInput")
+  titleInput.classList.add("borderInput");
+    categoryInput.classList.add("borderInput");
     titleInput.classList.remove("redBorder");
     categoryInput.classList.remove("redBorder");
     searchPicture.classList.remove("redBorder");
+
+  if(photo === undefined){
+    hasError = true
+    searchPicture.classList.add("redBorder");
+  }
+  if(title === ""){
+    hasError = true
+   titleInput.classList.remove("borderInput");
+    titleInput.classList.add("redBorder");
+  }
+  if(category === 0){
+    hasError = true
+    categoryInput.classList.remove("borderInput");
+    categoryInput.classList.add("redBorder");
+  }
+
+  return hasError
+}
+
+// ajout d'un nouveau projet 
+form.onsubmit = (event) => {
+  event.preventDefault()
+
+  const hasError = validateForm();
+
+  if(hasError){
+    return;
+  }
    
     const body = new FormData();
 
@@ -218,8 +236,8 @@ form.onsubmit = async (event) => {
     backModal();
     closeModal();
 
-      }
 }
+
 
 displayNavbar();
 main();

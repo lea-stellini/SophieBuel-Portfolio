@@ -3,7 +3,7 @@ export const globalConfig = {
 }
 
 // récupére les éléments de l'api
-export const work = async () => {
+export const getWorks = async () => {
     const data = await fetch(`${globalConfig.url}works`).then(response => response.json());
     return data;
  }
