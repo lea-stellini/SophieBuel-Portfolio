@@ -138,21 +138,21 @@ const initEventListeners = () => {
 
     // récupère la photo du projet
     photoInput.addEventListener('change', (event) => {
-    photo = event.target.files[0]
-    
-    if(photo){
-        const reader = new FileReader();
+        photo = event.target.files[0]
+        
+        if(photo){
+            const reader = new FileReader();
 
-        reader.onload = function(event) {
-        photoFile.src = event.target.result
+            reader.onload = function(event) {
+            photoFile.src = event.target.result
+            }
+
+            reader.readAsDataURL(photo)
+
+            photoFile.classList.remove("noedit");
+            inputPhoto.classList.add("noedit");
+            inputPhoto.classList.remove("flex")
         }
-
-        reader.readAsDataURL(photo)
-
-        photoFile.classList.remove("noedit");
-        inputPhoto.classList.add("noedit");
-        inputPhoto.classList.remove("flex")
-    }
 
     })
 
