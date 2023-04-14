@@ -115,6 +115,7 @@
 
 .card{
     position: relative;
+    min-height: 133px;
 }
 
 .btnIcon{

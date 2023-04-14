@@ -1,5 +1,5 @@
 import { displayNavbar } from "./navbar.js";
-import { globalConfig } from "../config.js";
+import { postLoginInfo } from "./api.js";
 
 //Récupération des éléments du DOM
 const loginForm = document.getElementById("loginForm")
@@ -46,18 +46,16 @@ const goToAdminPage = (response) => {
 }
 
 // Envoi des informations de login
-const postLogin = async (data) => {
-    let response = await fetch(`${globalConfig.url}users/login`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8"
-        },
-        body: JSON.stringify(data) 
-    }); 
+const login = async (data) => {
+    try{
+    const response = await postLoginInfo(data)
     const parseResponse = await response.json()
-   
     getToken(parseResponse)
     goToAdminPage(response)
+                                                                          
+    }catch(error){
+        alert('Désolé, il semble que le serveur a un problème...')
+    }
 }
 
 const validateFormLogin = () => {
@@ -67,9 +65,10 @@ const validateFormLogin = () => {
         
     let hasError = false;
 
-    if(email === null || password === null){
+    if(email === undefined || password === undefined){
         hasError = true;
         missingEl.classList.add("redWarning")
+        missingEl.classList.remove("invalid")
     }
 
     return hasError;
@@ -92,7 +91,7 @@ const initEventListeners = () => {
     })
 
     // se déclanche lors du clique sur se connecter
-    loginForm.onsubmit = (event) => {
+    loginForm.addEventListener("submit", (event) => {
         event.preventDefault();
        
         const hasError = validateFormLogin();
@@ -106,8 +105,8 @@ const initEventListeners = () => {
             password: password,
         }
         
-        postLogin(data)
-    }
+        login(data)
+    })
 }
 
 displayNavbar();

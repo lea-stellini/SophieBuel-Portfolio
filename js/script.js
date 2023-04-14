@@ -1,6 +1,6 @@
 import { displayNavbar } from "./navbar.js";
-import { getWorks } from "../config.js";
-import { displayInfos, displayPhoto } from "./display.js";
+import { getWorks } from "./api.js";
+import { displayInfos } from "./display.js";
 import { openModal, backModal, closeModal } from "./modal.js";
 
 // récupération des éléments du DOM 
@@ -11,14 +11,13 @@ const editBar = document.getElementById("edit");
 const editImg = document.getElementById("editImg");
 const editArticle = document.getElementById("editArticle");
 const editWorks = document.getElementById("editWorks");
+const filterAll = document.getElementById("all");
+const filterObjects = document.getElementById("objects");
+const filterApartments = document.getElementById("apartments");
+const filterHotels = document.getElementById("hotels");
 
 // filtre les éléments
 const main = async () => {
-  const filterAll = document.getElementById("all");
-  const filterObjects = document.getElementById("objects");
-  const filterApartments = document.getElementById("apartments");
-  const filterHotels = document.getElementById("hotels");
-
   const infos = await getWorks();
 
   displayInfos(infos);

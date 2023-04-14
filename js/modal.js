@@ -1,4 +1,4 @@
-import { getWorks, apiDeleteWork, postWork } from "../config.js";
+import { getWorks, apiDeleteWork, postWork } from "./api.js";
 import { displayInfos, displayPhoto } from "./display.js";
 
 const galleryEdit = document.getElementById("galleryEdit")
@@ -123,6 +123,30 @@ const validateForm = () => {
     return hasError
 }
 
+const handleForm = async () => {
+
+    const hasError = validateForm();
+    
+    if(hasError){
+    return;
+    }
+
+    const body = new FormData();
+    
+        body.append("image", photo);
+        body.append("title", title);
+        body.append("category", category); 
+    
+        await postWork(body);
+        
+        const infos = await getWorks();
+
+        displayInfos(infos)
+        displayPhoto(infos)
+        backModal();
+        closeModal();     
+}
+
 const initEventListeners = () => {
     // affichage modale ajout projet
     addWork.addEventListener("click", () =>{
@@ -167,30 +191,14 @@ const initEventListeners = () => {
     })
 
     // ajout d'un nouveau projet 
-    form.onsubmit = async (event) => {
+    form.addEventListener( "submit", (event) => {
         event.preventDefault()
     
-        const hasError = validateForm();
-    
-        if(hasError){
-        return;
-        }
-
-        const body = new FormData();
-    
-        body.append("image", photo);
-        body.append("title", title);
-        body.append("category", category); 
-    
-        await postWork(body);
         
-        const infos = await getWorks();
 
-        displayInfos(infos)
-        displayPhoto(infos)
-        backModal();
-        closeModal();     
-    }
+        handleForm()
+        
+    })
 
 }
 
