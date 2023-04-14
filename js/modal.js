@@ -133,18 +133,18 @@ const handleForm = async () => {
 
     const body = new FormData();
     
-        body.append("image", photo);
-        body.append("title", title);
-        body.append("category", category); 
+    body.append("image", photo);
+    body.append("title", title);
+    body.append("category", category); 
     
-        await postWork(body);
+    await postWork(body);
         
-        const infos = await getWorks();
+    const infos = await getWorks();
 
-        displayInfos(infos)
-        displayPhoto(infos)
-        backModal();
-        closeModal();     
+    displayInfos(infos)
+    displayPhoto(infos)
+    backModal();
+    closeModal();     
 }
 
 const initEventListeners = () => {
@@ -194,12 +194,8 @@ const initEventListeners = () => {
     form.addEventListener( "submit", (event) => {
         event.preventDefault()
     
-        
-
-        handleForm()
-        
+        handleForm()    
     })
-
 }
 
 initEventListeners();
