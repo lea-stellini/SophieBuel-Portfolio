@@ -40,6 +40,7 @@ export const displayPhoto = (infos) => {
     img.crossOrigin = "anonymous";
     p.innerText = "éditer";
     icon.src = "../assets/icons/delete.svg";
+    icon.crossOrigin = "anonymous";
     icon.className = "deleteBtn";
     button.className = "btnIcon";
     div.className = "card";
