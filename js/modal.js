@@ -37,6 +37,7 @@ const deleteWork = async (id) =>  {
     const infos = await getWorks();
      
     displayPhoto(infos);
+    displayInfos(infos)
 
     initDeleteBtn();
 }
@@ -46,7 +47,7 @@ const initDeleteBtn = () => {
 
     btnIcon.forEach(btn => {
         btn.addEventListener("click", () => {
-            console.log("test")
+            
             deleteWork(btn.parentNode.id)
         })
     })
