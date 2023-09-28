@@ -39,7 +39,7 @@ export const displayPhoto = (infos) => {
     img.alt = infos[i].title;
     img.crossOrigin = "anonymous";
     p.innerText = "éditer";
-    icon.src = "../assets/icons/delete.svg";
+    icon.src = "./assets/icons/delete.png";
     icon.crossOrigin = "anonymous";
     icon.className = "deleteBtn";
     button.className = "btnIcon";
